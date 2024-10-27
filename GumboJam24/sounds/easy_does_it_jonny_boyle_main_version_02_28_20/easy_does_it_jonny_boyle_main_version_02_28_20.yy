@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"easy_does_it_jonny_boyle_main_version_02_28_20",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":149.00244,
+  "name":"easy_does_it_jonny_boyle_main_version_02_28_20",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"easy_does_it_jonny_boyle_main_version_02_28_20.mp3",
+  "type":0,
+  "volume":0.29,
+}

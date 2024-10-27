@@ -52,6 +52,8 @@ function start_random_node()
 {
 	randomize()
 	global.current_node = irandom(ds_list_size(global.start_nodes)-1)
+	audio_stop_all()
+	audio_play_sound(clowning_around,0,1);
 	
 	var node = ds_list_find_value(global.start_nodes,global.current_node)
 
@@ -101,6 +103,8 @@ function run_vn()
 		{
 			if(!global.snacks_consumed && ChatterboxGetCurrent(global.chatterbox) != "Intro")
 			{
+				audio_stop_all()
+				audio_play_sound(easy_does_it_jonny_boyle_main_version_02_28_20,0,1)
 				var val = ds_list_find_value(global.start_nodes,global.current_node);
 				if(val != undefined)
 				{

@@ -18,3 +18,8 @@ if (!ChatterboxIsWaiting(global.chatterbox))
 	}
 	//TODO: Ensure that the buttons can be pressed i don't like this button shit
 }
+
+if(keyboard_check_pressed(ord("H")))
+{
+	audio_play_sound(car_honk,0,0);
+}

@@ -75,9 +75,10 @@ draw_sprite_ext(my_chin,0,x+5,y,0.07,0.07, image_angle, image_blend, image_alpha
 
 draw_sprite_ext(my_noses,0,x+5,y-2,0.07,0.07, image_angle, image_blend, image_alpha);
 
+/*
 draw_sprite_ext(my_ears,0,x-8,y-2,0.07,0.07, image_angle, image_blend, image_alpha); //left
 draw_sprite_ext(my_ears,0,x+15,y-2,0.07,0.07, image_angle, image_blend, image_alpha); //right
-
+*/
 draw_sprite_ext(my_mouths,0,x+5,y-1,0.07,0.07, image_angle, image_blend, image_alpha);
 draw_sprite_ext(my_clothes,0,x+5,y-5,0.07,0.07, image_angle, image_blend, image_alpha);
 

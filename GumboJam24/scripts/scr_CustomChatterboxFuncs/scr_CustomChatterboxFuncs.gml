@@ -19,6 +19,8 @@ function init_custom_functions()
 	ChatterboxAddFunction("GetPronouns",GetPronouns);
 	ChatterboxAddFunction("GetSeconds",GetSeconds);
 	ChatterboxAddFunction("GetThirds",GetThirds);
+	
+	ChatterboxAddFunction("GetLowestMeti",GetLowestMeti);
 	ChatterboxAddFunction("GetHighestMeti",GetHighestMeti);
 	ChatterboxAddFunction("GetHighestPecu",GetHighestPecu);
 	ChatterboxAddFunction("GetWonder",GetWonder);
@@ -55,7 +57,7 @@ function GetSeconds(_name)
 		var p = ds_list_find_value(global._party_members,i);
 		if(p._name == _name[0])
 		{
-			return p.seconds;
+			return p._secondary;
 		}
 
 	}
@@ -68,7 +70,7 @@ function GetThirds(_name)
 		var p = ds_list_find_value(global._party_members,i);
 		if(p._name == _name[0])
 		{
-			return p.tertiary;
+			return p._tertiary;
 		}
 
 	}
@@ -82,7 +84,7 @@ function GetLastMember()
 
 function GetRandChar(){
 
-	var rand_num = irandom(ds_list_size(global._party_members - 1));
+	var rand_num = irandom(ds_list_size(global._party_members)-1);
 	return ds_list_find_value(global._party_members,rand_num)._name;
 }
 
@@ -184,6 +186,24 @@ function GetHighestMeti(){
 	return ds_list_find_value(global._party_members,person)._name;
 }
 
+function GetLowestMeti(){
+
+	var person = -1;
+	var langs = 1000;
+	for(var i = 0; i < ds_list_size(global._party_members);i++)
+	{
+		var p = ds_list_find_value(global._party_members,i);
+		if(p.meticulousness < langs)
+		{
+			langs = p.meticulousness;
+			person = i;
+		}
+
+	}
+	
+	return ds_list_find_value(global._party_members,person)._name;
+}
+
 function GetWonder(_name)
 {
 	var person = -1;
@@ -202,7 +222,7 @@ function GetWonder(_name)
 function GetLowChild()
 {
 	var person = -1;
-	var langs = -1;
+	var langs = 1000;
 	for(var i = 0; i < ds_list_size(global._party_members);i++)
 	{
 		var p = ds_list_find_value(global._party_members,i);
@@ -210,10 +230,10 @@ function GetLowChild()
 		{
 			langs = p.child_like_wonder;
 			person = i;
+			show_debug_message(p);
 		}
 
 	}
-	show_debug_message(ds_list_find_value(global._party_members,person)._name);
 	return ds_list_find_value(global._party_members,person)._name;
 }
 
