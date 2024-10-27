@@ -35,7 +35,6 @@ if(show_stats)
 	draw_text(_x,_y +(vertical_padding*21) ,string("security:{0}",my_info.security));
 	draw_text(_x,_y +(vertical_padding*22) ,string("wrist strength:{0}",my_info.wrist_strength));
 	draw_text(_x,_y +(vertical_padding*23) ,string("slay:{0}",my_info.slay));
-	draw_text(_x,_y +(vertical_padding*24) ,string("speed:{0}",my_info._speed));
 
 
 }

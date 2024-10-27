@@ -27,7 +27,7 @@ if(show_stats)
 			break;
 		case 2:
 			draw_text(starting_x+10,starting_y-25,string("fashionability:{0}",my_info.fashionability));
-			draw_text(starting_x+10,starting_y-45,string("speed:{0}",my_info._speed));
+			draw_text(starting_x+10,starting_y-45,string("child-like wonder:{0}",my_info.child_like_wonder));
 			draw_text(starting_x+10,starting_y-65,string("charisma:{0}",my_info.charisma));
 			draw_text(starting_x+10,starting_y-85,string("fishing:{0}",my_info.fishing));
 			draw_text(starting_x+10,starting_y-105,string("synergy:{0}",my_info.synergy));
@@ -51,7 +51,7 @@ if(show_stats)
 			draw_text(starting_x+10,starting_y-45,string("wrist strength:{0}",my_info.wrist_strength));
 			draw_text(starting_x+10,starting_y-65,string("tolerance:{0}",my_info.tolerance));
 			draw_text(starting_x+10,starting_y-85,string("charisma:{0}",my_info.charisma));
-			draw_text(starting_x+10,starting_y-105,string("speed:{0}",my_info._speed));
+			draw_text(starting_x+10,starting_y-105,string("fashionability:{0}",my_info.fashionability));
 			break;
 		default:
 			draw_text(starting_x+10,starting_y-25,string("fleetfootedness:{0}",my_info.fleetfootedness));

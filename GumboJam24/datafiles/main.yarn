@@ -134,56 +134,465 @@ position: 399,87
 title: Pothole_Start
 position: 48,621
 ---
-watch out for the pothole!
+<<set $next_lane to GetAvailableLane()>>
+<<set $meti to GetHighestMeti()>>
+<<set $low_meti to GetLowestMeti()>>
+<<set $players_left = GetPlayersLeft()>>
+After having seen many cars ahead of you force their ways into the adjacent lanes, you finally come across the reason why. 
+A pothole. 
+Dangerously giant, only a few cars have tried to drive over it. 
+If a giant SUV can handle it, surely your cart can handle it too, right?
+-> Merge into the {$next_lane}
+-> Try to drive over it
+    <<if HasHighMeti()>>
+        {$meti} steps out of the cart and analyzes the pothole. 
+        They manage to figure out just the right way to manuever the carriage across to keep everyone and everything safe.
+    <<else>>
+        <<if RollDice(5)>> //this percentage stuff is done entirely wrong im sorry miles u_u
+            <<if $players_left == 1>>
+                The cart gets stuck in the pothole as you try to cross it. 
+                While you get out of the cart to try and push it across, the car behind you rear ends your cart to try and get it unstuck, shooting it forward. 
+                Before you know it, the cart is out of sight…
+            <<else>>
+                The cart gets stuck in the pothole as you try to cross it. 
+                {$low_meti} gets out of the cart to try and help, but as they do, the car behind you rear ends you to try and get you unstuck, shooting you forward. 
+                Before you know it, {$low_meti} is out of sight… 
+                Hopefully they can find someone else to take them home.
+                <<LoseCharacter($low_meti)>>
+                <<set $players_left = GetPlayersLeft()>>
+                There are now {$players_left} of you.
+            <<endif>>
+        <<else>>
+            <<if RollDice(60)>>
+                <<set $rand_char to GetRandomChar()>>
+                While bumping around trying to cross the pothole, {$rand_char} loses grip on the snacks, losing {$players_left *2} string cheese sticks in the process.
+            <<else>>
+                It's rough, but with some luck you manage to make it across without incident. 
+                Hopefully the rest of the bridge isn't this rough.
+            <<endif>>
+
+        <<endif>>
+
+    <<endif>>
 ===
 title: Prisoner_Dilemma_Start
 position: -95,-24
 ---
-prisoner's dilemma
+<<set $players_left = GetPlayersLeft()>>
+<<set $evil to GetMostEvil()>>
+<<set $charisma to GetMostCharisma()>>
+<<set $rand_char to GetRandomChar()>>
+<<set $rand_pro to GetPronouns($rand_char)>>
+<<set $c_pro to GetPronouns($charisma)>>
+<<set $rand_pro to GetSeconds($rand_char)>>
+<<set $evil_pro to GetThirds($evil)>>
+<<set $evil_sec to GetSeconds($evil)>>
+You approach what seems to be a set of toll booths. 
+As you get closer, the booths are labeled as "Snack or Sack." A board above explains the rules:
+You must send in one person from your car, and the person in the next lane over will do the same. Each person will pick snack or sack.
+If both people pick "snack," both cars will receive {$players_left *3} bags of cheese puffs. 
+If both pick "sack", nothing happens. 
+BUT if the representative of one car picks sack and the other picks snack, the car that picks sack will get {$players_left *4} bags of gummy worms and the car that picks snack will have their representative kept as a sacrifice to the bridge.
+What will you pick?
+->Snack
+    <<if HasHighCharisma()>>
+        {$charisma} volunteers, and chats with the person from the car opposite you. 
+        After stepping into the booth for a second, {$c_pro} quickly return with {$players_left *3} bags of chips. 
+        With one last wave, you're back on your way.
+        <<AddSnacks($players_left *3)>>
+    <<else>>
+        <<if RollDice(50)>>
+            <<if $players_left > 1>>
+                {$rand_char} volunteers and heads into the booth. 
+                After what feels like the longest 30 seconds of your life… {$rand_char} comes out with {$players_left *3} bags of chips. Nice!
+                <<AddSnacks($players_left*3)>>
+            <<else>>
+                You head into the booth. 
+                After what feels like the longest 30 seconds of your life… 3 bags of chips pop out of a secret compartment. Nice!
+                <<AddSnacks(3)>>
+            <<endif>>
+        <<else>>
+            <<if $players_left > 1>>
+                {$rand_char} volunteers and heads into the booth. 
+                After what feels like the longest 30 seconds of your life… a red light flashes on the booth and the bar in front of the car is lifted. 
+                It seems like you won't be seeing {$rand_pro} again.
+                <<LoseCharacter($rand_char)>>
+                <<set $players_left = GetPlayersLeft()>>
+                There are now {$players_left} of you.
+            <<else>>
+                You head into the booth. 
+                After what feels like the longest 30 seconds of your life… a red light flashes and you hear several locking mechanisms. 
+                Looks like you're trapped. 
+                Maybe you shouldn't have been so trusting.
+                GAME OVER.
+            <<endif>>
+        <<endif>>
+    <<endif>>
+->Sack
+    <<if HasHighEvil()>>
+        {$evil} volunteers with a grin on {$evil_pro} face. 
+        After a few seconds of chatting, they step into the booth. 
+        After a brief second you see {$evil_sec} with {$players_left *4} bags of gummy worms. 
+        From the lane over, you see a red light flashing. 
+        It's probably best if you don't think about it too hard.
+        <<AddSnacks($players_left *4)>>
+    <<else>>
+        <<if RollDice(50)>>
+            <<if $players_left > 1>>
+                {$rand_char} volunteers and heads into the booth. 
+                After 30 seconds… {$rand_pro} come back with {$players_left *4} bags of gummy worms. 
+                From the lane over, you see a red light flashing. 
+                It's probably best if you don't think about it too hard.
+                <<AddSnacks($players_left *4)>>
+            <<else>>
+                You head into the booth. After 30 seconds… a compartment pops open with 4 bags of gummy worms. 
+                From the lane over, you see a red light flashing. 
+                It's probably best if you don't think about it too hard.
+                <<AddSnacks(4)>>
+            <<endif>>
+        <<else>>
+            <<if $players_left > 1>>
+                [RANDOM CHARACTER] volunteers and heads into the booth. 
+                After 30 seconds… the booth opens and [Character] walks out empty handed. 
+                Oh well.
+            <<else>>
+                You head into the booth. 
+                After 30 seconds… the door to the booth just opens. 
+                Looks like it was sack on both sides. Oh well.
+            <<endif>>
+        <<endif>>
+    <<endif>>
+
 ===
 title: Trolley_Problem_Start
 position: 569,-158
 ---
-Trolley problem!
+<<set $rand_char to GetRandomChar()>>
+<<set $players_left = GetPlayersLeft()>>
+<<set $next_lane to GetAvailableLane()>>
+After moving so slowly for so long, things are finally starting to pick up. 
+But as you finally start moving at a fast speed, you see {$rand_char} somehow standing on the road ahead of you. 
+As you prepare to manuever to pick them up, you notice a pile of {$players_left *3} snacks one lane to the {$next_lane}. 
+You can't grab both...
+Which do you grab?
+->Grab {$rand_char}
+    You stay the course and pick up {$rand_char}. 
+    You would never have considered leaving them behind for some snacks! …Right?
+->Grab Snacks
+    You quickly merge {$next_lane} and pick up all the snacks as you drive right past {$rand_char}. 
+    As you drive away you turn and see them standing, staring back at you. They understand… probably.
+    <<LoseCharacter($rand_char)>>
+    <<set $players_left = GetPlayersLeft()>>
+    There are now {$players_left} of you.
 ===
 title: Low_Snacks
 position: -20,-311
 ---
-low snacks...
+<<set $snacks to GetSnackNum()>>
+<<set $evil to GetMostEvil()>>
+<<set $evilPron to GetPronouns($evil)>>
+<<set $evilPronouns to GetThirds($evil)>>
+<<set $rand_char to GetRandomChar()>>
+<<set $rand_pronouns to GetThirds($rand_char)>>
+<<set $rand_pron to GetSeconds($rand_char)>>
+As you go to grab a bite of your favorite chewy candy, you realize there are only {$snacks} left… 
+With the rate you all have been eating them, you'll run out before the end of the bridge. 
+There's only one possible solution to this problem: Kick someone out.
+Would you like to leave someone to hitchhike on the bridge, or risk running out of food and starving?
+->Kick Party member
+    <<if HasHighEvil()>>
+        {$evil} has a mischievous look in {$evilPronouns} eye. 
+        As you open the door to let them out, {$evilPron} suddenly grab 2 snacks before jumping out. 
+        <<LoseSnack(2)>>
+        Maybe you should have seen it coming with how evil they are… but now the snack budget is tighter than ever.
+        <<LoseCharacter($evil)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+    <<else>>
+        <<if RollDice(33)>>
+            {$rand_char} looks disappointed, but has a hint of understanding in their eyes. 
+            With one last glance back, they step out of the moving cart onto the street, thumb held high. 
+            <<set $players_left = GetPlayersLeft()>>
+            There are now {$players_left} of you.
+        <<else>>
+            <<if RollDice(50)>>
+                It's a no brainer. {$rand_char} has been eating more than {$rand_pronouns} share of snacks the whole trip. It's only fair to kick them out. 
+                There's no remorse on their face as they step outside, seemingly sizing up which car might have the best haul of snacks for them to feast on next.
+                <<LoseCharacter($rand_char)>>
+                <<set $players_left = GetPlayersLeft()>>
+                 There are now {$players_left} of you.
+            <<else>>
+                As the driver, you get the final say, but {$rand_char} seems to not want to leave without a fight. 
+                With all of your might you manage to push {$rand_pron} out of the cart and keep moving forward. 
+                It's a cruel world out there and it's your responsibility to make sure as many people make it back as possible.
+                <<LoseCharacter($rand_char)>>
+                <<set $players_left = GetPlayersLeft()>>
+                There are now {$players_left} of you.
+            <<endif>>
+        <<endif>>
+    <<endif>>
+->Continue
+    The bridge is long but you trust you'll make it through. At least if you go out, you go out together.
 ===
 title: Pop_Quiz
 position: 248,-123
 ---
-pop quiz!
+<<set $players_left = GetPlayersLeft()>>
+<<set $lo_child to GetLowChild()>>
+<<set $randomNum to RollDice(3)>>
+<<set $meti to GetHighestMeti()>>
+<<set $most_fashionable to GetMostFashionable()>>
+<<set $charisma to GetMostCharisma()>>
+As the car in front of you pulls ahead, a mysterious hooded figure appears in front of your cart.
+"It's time for a test."
+<<if $randomNum == 2>>
+    "What is the cube root of 512?"
+    -> 8
+        Correct. You may proceed. Enjoy this gift." 
+        The hooded figure disappears and on your lap you find {$players_left *3} bags of snacks. Nice!
+        <<AddSnacks($players_left *3)>>
+    -> 12/25
+        <<if HasHighMeti()>>
+            {$meti} interjects before you can respond. "8. It's 8."
+            "Correct. You may proceed. Enjoy this gift." 
+            The hooded figure disappears and on your lap you find {$players_left *3} bags of snacks. Nice!
+            <<AddSnacks($players_left *3)>>
+            Looks like you owe {$meti}.
+        <<elseif RollDice(80)>>
+            "Wrong. The price for your failure is 3 bags of candy. Goodbye." 
+            The hooded figure disappears, and with them some of your snacks.
+            <<LoseSnack(3)>>
+        <<else>>
+            "Wrong. The price for your failure is the weakest among you. Goodbye." 
+            The hooded figure disappears. 
+            As you turn to check on your group, you see {$lo_child} is gone. 
+            Maybe you should brush up on your math skills.
+            <<LoseCharacter($lo_child)>>
+            <<set $players_left = GetPlayersLeft()>>
+            There are now {$players_left} of you.
+        <<endif>>
+<<elseif $randomNum == 1>>
+    "What year were FIFA, Doom, and Myst released?"
+    ->1993
+        "Correct. You may proceed. Enjoy this gift." 
+        The hooded figure disappears and on your lap you find {$players_left *3} bags of snacks. Nice!
+        <<AddSnacks($players_left *3)>>
+    ->1989
+        <<jump Quiz_Wrong>>
+    ->1983
+        <<jump Quiz_Wrong>>
+<<else>>
+    "Do you like this outfit?"
+    ->Yeah!
+        "Thanks." 
+        The hooded figure disappears and on your lap you find {$players_left *3} bags of snacks. Nice!
+        <<AddSnacks($players_left *3)>>
+    ->It's Alright.
+        <<if HasHighFashion()>>
+            {$most_fashionable} adds "the hood is cool but the color is actually off gray instead of a full black. A darker hood with a slightly shorter cape will help you feel more intimidating."
+            "Thanks for the advice. Enjoy this gift." 
+            The hooded figure disappears and on your lap you find {$players_left *4} bags of snacks. 
+            Looks like you owe {$most_fashionable}.
+            <<AddSnacks($players_left *4)>>
+        <<else>>
+            "Oh. Ok." The hooded figure disappears. That was weird.
+        <<endif>>
+    ->Not really.
+        "No need to be rude. The price for your social ineptitude is the weakest among you. Goodbye." 
+        The hooded figure disappears. 
+        As you turn to check on your group, you see {$charisma} is gone. 
+        Maybe you should tell ominous figures what they want to hear.
+        <<LoseCharacter($charisma)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+<<endif>>
 ===
 title: Are_We_There
 position: 405,601
 ---
-are we there?
+<<set $players_left = GetPlayersLeft()>>
+<<set $child to GetHighChild()>>
+<<set $lo_child to GetLowChild()>>
+<<set $lo_pronouns to GetPronouns($lo_child)>>
+<<set $lo_seconds to GetSeconds($lo_child)>>
+<<set $child_pronouns to GetPronouns($child)>>
+{$child} keeps asking if you're there yet. You keep saying no. They keep asking. You keep saying no. They keep asking.
+Finally {$lo_child} snaps.
+"I NEED YOU GONE. NOW."
+-> Side with {$child}
+    <<if GetWonder($lo_child) < 20>>
+        Without a word {$lo_child} opens the door and hops out of the car. Were {$child_pronouns} really that annoying?
+        <<LoseCharacter($lo_child)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+    <<else>>
+        {$lo_child} rolls {$lo_seconds} eyes. 
+        With a gleeful smile {$child} turns to you. 
+        "Thanks for being so nice! Have some of my secret stash!" 
+        {$child_pronouns} hand you {$players_left *3} snacks.
+        <<AddSnacks($players_left*3)>>
+    <<endif>>
+-> Side with {$lo_child}
+    <<if GetWonder($child) > 49>>
+        {$child} tears up. "Fine! Then I'll leave!"
+        {$child} quickly opens the door and jumps out. 
+        You and {$lo_child} look at each other. Maybe you could have been a bit more sensitive.
+        <<LoseCharacter($child)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+    <<elseif GetEvil($lo_child) > 69>>
+        {$lo_child} grins. 
+        Without a word, they open the door and push {$child} out. 
+        Shocked, you turn back to look at {$lo_seconds}. {$lo_pronouns} look proud. Maybe you should be afraid.
+        <<LoseCharacter($child)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+    <<else>>
+        {$child} blows raspberries at the group before getting out.
+        {$lo_child} rolls {$lo_seconds} before closing the door with a sigh of relief.
+        It's a lot more quiet in here, but you worry you may miss the banter.
+        <<LoseCharacter($child)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+    <<endif>>
+-> Try to convince them to both settle down.
+    <<if GetEvil($lo_child) > 69>>
+       "I hate people pleasers." 
+        {$lo_child} hops out of the car. Did you really say something so wrong?
+        <<LoseCharacter($lo_child)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+    <<else>>
+        "Fine." 
+        "Fine!" 
+        Both of them scoot a little far away from each other but it seems like the tension is fizzling out for now.
+    <<endif>>
 ===
 title: Intro
 position: 292,-368
 ---
 Rush hour traffic is the worst. 
 You made the brave decision to carpool with 3 of your coworkers. 
-Unfortunately it’s your day to drive and you must pass over the longest bridge in the world.
-You must make it across the bridge, and make sure you’re ready to turn off in the right spot before you go insane, or worse, hungry. 
+Unfortunately it's your day to drive and you must pass over the longest bridge in the world.
+You must make it across the bridge, and make sure you're ready to turn off in the right spot before you go insane, or worse, hungry. 
 Are you ready?
 ->Time to drive
 ->How does this work?
-    As you drive along the bridge, you’ll come across several weird occurrences. 
-    You’ll have to make different choices to try and keep you and the rest of your party safe until your destination.
+    As you drive along the bridge, you'll come across several weird occurrences. 
+    You'll have to make different choices to try and keep you and the rest of your party safe until your destination.
     You have a limited amount of snacks to keep you going. After every event, each party member will consume a snack. 
-    Different events also have the potential to earn or lose you snacks. If you don’t have enough snacks after an event, it’s game over.
+    Different events also have the potential to earn or lose you snacks. If you don't have enough snacks after an event, it's game over.
     Along your ride, you will be able to change lanes. 
     While the left lane moves faster, each lane merge takes time in the form of snacks, and you need to end the ride in one of the two rightmost lanes to win.
     All good?
     ->All good.
     ->I'm still confused...
-        Well. It’s best if you just give it a shot. You’ll probably lose on your first try, and that’s ok! 
-        Traffic is brutal out here. But you’ll learn by doing.
+        Well. It's best if you just give it a shot. You'll probably lose on your first try, and that's ok! 
+        Traffic is brutal out here. But you'll learn by doing.
         ->I'll give it a try.
         ->I'm not sure about this.
-            Well it’s too late, you’re on the bridge now.
+            Well it's too late, you're on the bridge now.
 
+===
+title: Quiz_Wrong
+position: 48,226
+---
+<<set $pec to GetHighestPecu()>>
+<<set $players_left = GetPlayersLeft()>>
+<<set $most_fashionable to GetMostFashionable()>>
+
+<<if HasHighPecu()>>
+        {$pec} interjects before you can respond. "8. It's 8."
+        "Correct. You may proceed. Enjoy this gift." 
+        The hooded figure disappears and on your lap you find {$players_left *3} bags of snacks. Nice!
+        <<AddSnacks($players_left *3)>>
+        Looks like you owe {$pec}.
+<<elseif RollDice(80)>>
+        "Wrong. The price for your failure is 3 bags of candy. Goodbye." 
+        The hooded figure disappears, and with them some of your snacks.
+        <<LoseSnack(3)>>
+<<else>>
+        "Wrong. The price for your failure is the weakest among you. Goodbye." 
+        The hooded figure disappears. 
+        As you turn to check on your group, you see {$most_fashionable} is gone. 
+        Maybe you should brush up on your math skills.
+        <<LoseCharacter($most_fashionable)>>
+        <<set $players_left = GetPlayersLeft()>>
+        There are now {$players_left} of you.
+<<endif>>
+===
+title: Bridge_Toll
+position: 58,236
+---
+
+===
+title: Win
+position: 68,246
+---
+<<set $rand_char to GetRandomChar()>>
+<<set $chara to GetLastMember()>>
+<<if $players_left == 4>>
+Congratulations! You made it across the bridge in one piece! 
+Despite the tough journey, you managed to keep yourself and all of your coworkers safe. 
+Now tomorrow you get to chill in the passenger seat. Nobody could consider throwing you out now.
+Right?
+You earned a gold medal!
+<<elseif $players_left == 3>>
+Congratulations! You made it across the bridge mostly unscathed. 
+Besides, {$rand_char} wasn't all that well liked anyway so it's not a big deal.
+Now tomorrow you get to chill in the passenger seat. Hopefully nobody considers throwing you out.
+<<elseif $players_left == 2>>
+Congratulations! You made it across the bridge only slightly scathed. 
+You and {$chara} were the cool ones, so that's all that matters.
+Now tomorrow you get to chill in the passenger seat. That does mean you're at risk of being thrown out but… that wouldn't happen. 
+Right?
+<<elseif $players_left == 1>>
+Congratulations! You made it across the bridge! 
+It's just you. But you're the only one that matters. 
+Unfortunately that does mean you'll have to drive yourself tomorrow since there isn't anyone left to carpool with but what can you do?
+<<endif>>
+===
+title: No_Snacks
+position: 78,256
+---
+<<set $chara to GetLastMember()>>
+Your stomach growls. As you go to grab a bag of chips, you find it's empty. 
+You go for a granola bar instead. Empy wrapper. Gummies. Gone. There's nothing. 
+Your eyelids feel heavy as your stomach feels like it's going to devour itself.
+<<if $players_left ==1>>
+You turn and look, it seems like everyone else is in the same conundrum.
+<<elseif $players_left >1>>
+You turn and look, it seems like {$chara} has the same issue.
+<<endif>>
+Maybe you should have made less lane changes. 
+Maybe you should have tried to get more snacks while on the road.
+Maybe you should have kicked people out sooner to save more snacks for the rest of you.
+All the maybes float around as your consciousness fades.
+===
+title: End_Middle
+position: 88,266
+---
+Finally! You've made it to the end of the bridge! Freedom! 
+But as you approach the light a pit forms in your stomach. 
+You're in the wrong lane. 
+You try to merge right but it's too late.
+Stuck in the middle, you're forced to drive straight forward. Traffic never lets up.
+Try as you might to make it in the right lane and make a U-turn. 
+You're never given the chance. Night turns to day and you keep going straight. 
+Fate is cruel but selfish drivers are crueler.
+GAME OVER
+===
+title: End_Left
+position: 98,276
+---
+Finally! You've made it to the end of the bridge! Freedom! 
+But as you approach the light a pit forms in your stomach. 
+You're in the wrong lane. 
+You try to merge right but it's too late.
+On the left side, you're forced to turn. 
+The street leads to… 
+Oh no. 
+An even longer bridge. Away from your house. 
+It looks like you'll never make it home.
+GAME OVER.
 ===

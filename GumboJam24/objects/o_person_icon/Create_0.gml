@@ -11,7 +11,7 @@ image_yscale =1.5;
 starting_x = x + 80;
 starting_y = y - 10;
 
-pop_up_width = 180;
+pop_up_width = 200;
 pop_up_height = 125;
 
 current_stats_shown = 0;
