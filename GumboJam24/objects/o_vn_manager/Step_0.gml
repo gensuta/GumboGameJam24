@@ -1,8 +1,5 @@
-if (ChatterboxIsWaiting(global.chatterbox))
-{
-    run_vn()
-}
-else
+run_vn()
+if (!ChatterboxIsWaiting(global.chatterbox))
 {
     //If we're not waiting then we have some options!
     //Check for any keyboard input

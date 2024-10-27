@@ -6,6 +6,13 @@ typist = scribble_typist(); // there is only ONE typist
 
 global.snacks = 50;
 global._party_members = ds_list_create();
+
+global.start_nodes = ds_list_create()
+global.current_node = -1
+
+ds_list_add(global.start_nodes,"Riddle_Troll_Start","Pothole_Start",
+"Prisoner_Dilemma_Start","Trolley_Problem_Start","Low_Snacks","Pop_Quiz","Are_We_There");
+
 while (ds_list_size(global._party_members) < 3)
 {
 	var member = new Person()
@@ -34,7 +41,42 @@ set_typing_speed(1)
 
 horizontal_padding = 25;
 vertical_padding = 20;
+
+
+
 }
+
+
+//randomized node get!
+function start_random_node()
+{
+	randomize()
+	global.current_node = irandom(ds_list_size(global.start_nodes))
+	
+	var node = ds_list_find_value(global.start_nodes,global.current_node)
+
+	//below has requirements. if it doesn't meet them, remove and keep going EXCEPT for low on snacks
+	if(node == "Trolley_Problem_Start")
+	{
+
+	}
+	if(node == "Are_We_There")
+	{
+
+	}
+
+	if(node == "Low_Snacks")
+	{
+
+	}
+
+	run_node(node);
+}
+
+
+
+
+
 
 function run_node(_node_name)
 {
@@ -53,6 +95,15 @@ function run_vn()
 			        ChatterboxContinue(global.chatterbox);
 			    }
 			}
+		}
+		else
+		{
+			var val = ds_list_find_value(global.start_nodes,global.current_node);
+			if(val != undefined)
+			{
+					ds_list_delete(global.start_nodes,global.current_node)
+			}
+	
 		}
 }
 
@@ -122,7 +173,7 @@ function set_textbox_pos(_x,_y)
 
 function set_textbox_to_center()
 {
-	textbox_x_pos = room_width/2 - 200;
+	textbox_x_pos = room_width/2 - 300;
 	textbox_y_pos = room_height/2 + room_height/4; // trying to make it lower center haha
 }
 
@@ -146,7 +197,7 @@ function _display_textbox()
 	if(textbox_sprite == pointer_null)
 	{
 		draw_set_color(c_gray)
-		draw_rectangle(textbox_x_pos,textbox_y_pos,textbox_x_pos+500,textbox_y_pos+100,false)
+		draw_rectangle(textbox_x_pos,textbox_y_pos,textbox_x_pos+600,textbox_y_pos+100,false)
 	}
 	
 	else
@@ -189,7 +240,7 @@ function _display_continue_sprite()
 
 function _display_options()
 {
-	var _x = textbox_x_pos + horizontal_padding;
+	var _x = textbox_x_pos + 100 + horizontal_padding;
 	var _y = textbox_y_pos + vertical_padding -200;
 	
 
