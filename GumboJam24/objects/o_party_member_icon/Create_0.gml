@@ -1,3 +1,3 @@
 show_stats = false
 my_info = pointer_null
-vertical_padding = 10;
+vertical_padding = 15;

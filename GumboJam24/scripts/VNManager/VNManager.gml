@@ -5,7 +5,7 @@ function initialize_vn(){
 typist = scribble_typist(); // there is only ONE typist
 
 global.snacks = 50;
-global._party_members = ds_list_create();
+
 
 global.start_nodes = ds_list_create()
 global.current_node = -1
@@ -42,7 +42,7 @@ set_typing_speed(1)
 horizontal_padding = 25;
 vertical_padding = 20;
 
-
+global.snacks_consumed = false;
 
 }
 
@@ -88,6 +88,7 @@ function run_vn()
 {
 		if (!ChatterboxIsStopped(global.chatterbox))
 		{
+			global.snacks_consumed = false;
 			if (ChatterboxIsWaiting(global.chatterbox))
 			{
 				if (keyboard_check_released(vk_space))
@@ -98,11 +99,17 @@ function run_vn()
 		}
 		else
 		{
-			var val = ds_list_find_value(global.start_nodes,global.current_node);
-			if(val != undefined)
+			if(!global.snacks_consumed && ChatterboxGetCurrent(global.chatterbox) != "Intro")
 			{
-					ds_list_delete(global.start_nodes,global.current_node)
+				var val = ds_list_find_value(global.start_nodes,global.current_node);
+				if(val != undefined)
+				{
+						ds_list_delete(global.start_nodes,global.current_node)
+				}
+				global.snacks -= ds_list_size(global._party_members) +1;
+				global.snacks_consumed = true;
 			}
+			
 	
 		}
 }

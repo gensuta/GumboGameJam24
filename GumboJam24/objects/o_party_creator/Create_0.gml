@@ -1,11 +1,11 @@
 global._party_members = ds_list_create()
 
 potential_members = ds_list_create();
-starting_x= room_width/2 - 150;
-starting_y = room_height/2 - 25;
+starting_x= room_width/2 - 300;
+starting_y = room_height/2 - 100;
 
-horizontal_padding = 100;
-vertical_padding = 150;
+horizontal_padding = 350;
+vertical_padding = 300;
 max_members_per_row = 3;
 
 var _x = starting_x;

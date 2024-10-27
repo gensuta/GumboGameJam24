@@ -2,7 +2,7 @@ title: Riddle_Troll_Start
 position: 120,149
 ---
 The car in front of you is [shake]flung[/shake] off the bridge. 
-As you look forward to see what happened, you find a troll standing there, making direct eye contact with you. 
+As you look forward to see what happened, you find a Troll standing there, making direct eye contact with you. 
 He slowly walks up to your cart.
 "[wave]Answer my riddle and you can continue on your way.[/wave]"
 What do you do?
@@ -21,19 +21,19 @@ position: 294,318
 "What goes up and down but never moves?"
 ->Stairs?
     "You're safe. For today."
-    The troll passes by and goes to the next car. 
+    The Troll passes by and goes to the next car. 
     Not too long after you hear the sound of another car being tossed off the bridge.
 ->A drawbridge?
     "Wrong... Now you."
     <<if $players_left == 1>>
-        The troll stares at you intensely. 
+        The Troll stares at you intensely. 
         "You look tasty." 
-        Frozen in fear, you're helpless as the troll picks you up and chomps your head off.
+        Frozen in fear, you're helpless as the Troll picks you up and chomps your head off.
         GAME OVER
     <<else>>
-        The troll points his finger at {$most_fashionable}.
+        The Troll points his finger at {$most_fashionable}.
         "You look tasty."
-        While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
+        While the whole party is frozen in fear, the Troll reaches in, grabs, and eats {$most_fashionable}. 
         Without another word he just continues on his way.
         <<LoseCharacter($most_fashionable)>>
         <<set $players_left = GetPlayersLeft()>>
@@ -43,14 +43,14 @@ position: 294,318
 ->The Stock market?
     "Wrong... Now you."
     <<if $players_left == 1>>
-        The troll stares at you intensely. 
+        The Troll stares at you intensely. 
         "You look tasty." 
-        Frozen in fear, you're helpless as the troll picks you up and chomps your head off.
+        Frozen in fear, you're helpless as the Troll picks you up and chomps your head off.
         GAME OVER
     <<else>>
-        The troll points his finger at {$most_fashionable}.
+        The Troll points his finger at {$most_fashionable}.
         "You look tasty."
-        While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
+        While the whole party is frozen in fear, the Troll reaches in, grabs, and eats {$most_fashionable}. 
         Without another word he just continues on his way.
         <<LoseCharacter($most_fashionable)>>
         <<set $players_left = GetPlayersLeft()>>
@@ -67,7 +67,7 @@ position: 16,336
 <<if HasHighLang()>>
     {$most_lang} begins to speak in Trollish to try to convince the Troll to take some snacks and leave you alone.
     The Troll looks shocked and begins to speak back in Trollish. They seem to be laughing and getting along, but you can't understand them.
-    Ultimately the troll chuckles and walks away.
+    Ultimately the Troll chuckles and walks away.
     {$most_lang} says he was actually pretty chill. Who would have guessed?
 <<elseif HasHighHaggling()>>
     "You're not you when you're hungry. Have an unbranded snack." 
@@ -78,15 +78,15 @@ position: 16,336
 <<else>>
     <<if $players_left == 1>>
         "A snack sounds nice. You will do." 
-        The troll stares at you intensely. 
+        The Troll stares at you intensely. 
         "You look tasty." 
-        Frozen in fear, you're helpless as the troll picks you up and chomps your head off.
+        Frozen in fear, you're helpless as the Troll picks you up and chomps your head off.
         GAME OVER
     <<else>>
         "A snack sounds nice. You will do." 
-        The troll points his finger at {$most_fashionable}. 
+        The Troll points his finger at {$most_fashionable}. 
         "You look tasty."
-        While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
+        While the whole party is frozen in fear, the Troll reaches in, grabs, and eats {$most_fashionable}. 
         Without another word he just continues on his way.
         <<LoseCharacter($most_fashionable)>>
         <<set $players_left = GetPlayersLeft()>>
@@ -110,11 +110,11 @@ position: 399,87
         <<if $players_left == 1>>
             <<if RollDice(50)>>
                 "BREAK!" You scream to no one. 
-                While you try your best to run away, the troll has nobody else to chase but you, so while you may run faster, he ultimately catches you, and chomps down on your head.
+                While you try your best to run away, the Troll has nobody else to chase but you, so while you may run faster, he ultimately catches you, and chomps down on your head.
                 GAME OVER
             <<else>>
                 "BREAK!" You scream to no one. 
-                After running for a short time you turn to see the troll give up. 
+                After running for a short time you turn to see the Troll give up. 
                 As you breathe a sigh of relief you realize why he turned around. 
                 You ran off the bridge. 
                 As you fall you wonder if maybe you could have been smarter about that.
@@ -144,7 +144,7 @@ prisoner's dilemma
 title: Trolley_Problem_Start
 position: 569,-158
 ---
-trolley problem!
+Trolley problem!
 ===
 title: Low_Snacks
 position: -20,-311
@@ -171,5 +171,19 @@ You must make it across the bridge, and make sure you’re ready to turn off in 
 Are you ready?
 ->Time to drive
 ->How does this work?
+    As you drive along the bridge, you’ll come across several weird occurrences. 
+    You’ll have to make different choices to try and keep you and the rest of your party safe until your destination.
+    You have a limited amount of snacks to keep you going. After every event, each party member will consume a snack. 
+    Different events also have the potential to earn or lose you snacks. If you don’t have enough snacks after an event, it’s game over.
+    Along your ride, you will be able to change lanes. 
+    While the left lane moves faster, each lane merge takes time in the form of snacks, and you need to end the ride in one of the two rightmost lanes to win.
+    All good?
+    ->All good.
+    ->I'm still confused...
+        Well. It’s best if you just give it a shot. You’ll probably lose on your first try, and that’s ok! 
+        Traffic is brutal out here. But you’ll learn by doing.
+        ->I'll give it a try.
+        ->I'm not sure about this.
+            Well it’s too late, you’re on the bridge now.
 
 ===

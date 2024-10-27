@@ -12,3 +12,4 @@ if(global.current_lane>3)
 
 draw_set_color(c_black)
 draw_text(x-100,y+20,current_lane_str);
+draw_text(x-100,y+40,string("Snacks:{0}",global.snacks));
