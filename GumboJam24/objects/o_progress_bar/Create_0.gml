@@ -1,0 +1,1 @@
+global.progress = 0;

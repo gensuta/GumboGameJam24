@@ -51,7 +51,7 @@ global.snacks_consumed = false;
 function start_random_node()
 {
 	randomize()
-	global.current_node = irandom(ds_list_size(global.start_nodes))
+	global.current_node = irandom(ds_list_size(global.start_nodes)-1)
 	
 	var node = ds_list_find_value(global.start_nodes,global.current_node)
 
@@ -108,6 +108,7 @@ function run_vn()
 				}
 				global.snacks -= ds_list_size(global._party_members) +1;
 				global.snacks_consumed = true;
+				global.progress+= 10;
 			}
 			
 	

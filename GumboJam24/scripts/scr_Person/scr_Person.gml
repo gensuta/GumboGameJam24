@@ -27,7 +27,6 @@ function Person() constructor{
 	security = 0;
 	wrist_strength =0;
 	slay = 0;
-	_speed = 0;
 	
 	static randomize_info = function()
 	{
@@ -36,15 +35,18 @@ function Person() constructor{
 		_name = get_random_name(); 
 		
 		var pronouns = "she,he,they,xe,ze,fae,bun,it,she"
-		var seconds = "her,him,them,xem,zir,faem,bun,it,hyr"
+		var seconds = "her,him,them,xem,zir,faer,bun,it,hyr"
+		var tertiary = "her,his,their,xir,zir,faers,buns,its,hyr"
 		var split_pronouns = string_split(pronouns,",");
 		var split_seconds = string_split(seconds,",");
+		var split_thirds = string_split(tertiary,",");
 		
 		var rand_num = irandom(array_length(split_pronouns)-1);
 		
 		
 		_pronouns = array_get(split_pronouns,rand_num);
 		_secondary = array_get(split_seconds,rand_num);
+		_tertiary =  array_get(split_thirds,rand_num);
 		fashionability = irandom(100);
 		fleetfootedness = irandom(100);
 		languages_learned = irandom(100);
@@ -66,7 +68,6 @@ function Person() constructor{
 		security = irandom(100);
 		wrist_strength = irandom(100);
 		slay = irandom(100);
-		_speed = irandom(100);
 	}
 }
 
@@ -114,7 +115,6 @@ global.player.child_like_wonder = 0;
 global.player.security = 0;
 global.player.wrist_strength =0;
 global.player.slay = 0;
-global.player._speed = 0;
 
 
 
