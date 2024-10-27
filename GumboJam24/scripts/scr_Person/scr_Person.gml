@@ -86,3 +86,33 @@ function get_random_pronouns()
 
 	return array_get(split_pronouns,irandom(array_length(split_pronouns)-1))
 }
+
+// we don't need this tbh
+function reroll_player_stats()
+{
+global.player.fashionability = random_range(30,60);
+global.player.fleetfootedness = 0;
+global.player.languages_learned = 0
+global.player.haggling = 0;
+global.player.charisma = 0;
+global.player.evil = 0
+global.player.fishing = 0;
+global.player.patience = 0;
+global.player.intuition = 0;
+global.player.singing = 0;
+
+global.player.greed =0;
+global.player.peculiarity =0;
+global.player.tolerance =0;
+global.player.synergy =0;
+global.player.brittleness = 0;
+global.player.meticulousness =0; 
+global.player.child_like_wonder = 0;
+global.player.security = 0;
+global.player.wrist_strength =0;
+global.player.slay = 0;
+global.player._speed = 0;
+
+
+
+}

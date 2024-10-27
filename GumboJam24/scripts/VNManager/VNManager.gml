@@ -4,6 +4,19 @@ function initialize_vn(){
 // enabling typing from scribble
 typist = scribble_typist(); // there is only ONE typist
 
+global._party_members = ds_list_create();
+
+
+//TEMP: Creating partymembers to show
+while (ds_list_size(global._party_members) < 3)
+{
+	var member = new Person()
+	member.randomize_info();
+	ds_list_add(global._party_members,member);
+}
+
+//TODO: INIT CUSTOM FUNCS HERE
+init_custom_functions()
 
 // This is how we start getting lines of text from Yarn!
 ChatterboxLoadFromFile("main.yarn")

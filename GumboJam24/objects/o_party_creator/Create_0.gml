@@ -20,7 +20,7 @@ while (ds_list_size(potential_members) < 5)
 	ds_list_add(potential_members,_new_person);
 	
 	
-	var _new_member = instance_create_layer(_x,_y,"Instances",o_person_member_icon);
+	var _new_member = instance_create_layer(_x,_y,"Instances",o_person_icon);
 	
 	with(_new_member)
 	{

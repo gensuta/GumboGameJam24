@@ -1,5 +1,5 @@
 title: Riddle_Troll_Start
-position: 54,265
+position: 120,149
 ---
 The car in front of you is [shake]flung[/shake] off the bridge. 
 As you look forward to see what happened, you find a troll standing there, making direct eye contact with you. 
@@ -7,6 +7,40 @@ He slowly walks up to your cart.
 "[wave]Answer my riddle and you can continue on your way.[/wave]"
 What do you do?
 ->Attempt the Riddle
+    <<jump Attempt_Riddle>>
 ->Offer him some snacks instead
+    <<jump Offer_Snacks>>
 ->Book it
+    <<jump Book_It>>
+===
+title: Attempt_Riddle
+position: 294,318
+---
+"What goes up and down but never moves?"
+->Stairs?
+    "You’re safe. For today."
+    The troll passes by and goes to the next car. 
+    Not too long after you hear the sound of another car being tossed off the bridge.
+->A drawbridge?
+    <<set $most_fashionable = GetMostFashionable()>>
+    "Wrong... Now you."
+    The troll points his finger at {$most_fashionable}. "You look tasty."
+    While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
+    Without another word he just continues on his way.
+    That leaves [X] number of you.
+->The Stock market?
+    "Wrong... Now you."
+    The troll points his finger at [MOST FASHIONABLE CHARACTER]. "You look tasty."
+    While the whole party is frozen in fear, the troll reaches in, grabs, and eats [CHARACTER]. Without another word he just continues on his way.
+    That leaves [X] number of you.
+===
+title: Offer_Snacks
+position: 16,336
+---
+//we need some if statements in here!!
+===
+title: Book_It
+position: 399,87
+---
+
 ===
