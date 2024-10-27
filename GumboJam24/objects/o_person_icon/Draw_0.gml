@@ -67,7 +67,7 @@ if(show_stats)
 //show name and pronouns a lil under
 draw_set_color(c_white)
 draw_text(x+10,y+80,my_info._name)
-draw_text(x+10,y+100,my_info._pronouns)
+draw_text(x+10,y+100,string("{0}/{1}",my_info._pronouns,my_info._secondary));
 
 
 

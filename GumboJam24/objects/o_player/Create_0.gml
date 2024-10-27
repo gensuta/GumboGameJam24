@@ -1,2 +1,2 @@
 my_info = global.player
-_snacks = 50;
+//we kinda dont need this obj lol

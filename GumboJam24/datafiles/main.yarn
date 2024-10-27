@@ -16,31 +16,118 @@ What do you do?
 title: Attempt_Riddle
 position: 294,318
 ---
+<<set $players_left = GetPlayersLeft()>>
+<<set $most_fashionable = GetMostFashionable()>>
 "What goes up and down but never moves?"
 ->Stairs?
-    "You’re safe. For today."
+    "You're safe. For today."
     The troll passes by and goes to the next car. 
     Not too long after you hear the sound of another car being tossed off the bridge.
 ->A drawbridge?
-    <<set $most_fashionable = GetMostFashionable()>>
     "Wrong... Now you."
-    The troll points his finger at {$most_fashionable}. "You look tasty."
-    While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
-    Without another word he just continues on his way.
-    That leaves [X] number of you.
+    <<if $players_left == 1>>
+        The troll stares at you intensely. 
+        "You look tasty." 
+        Frozen in fear, you're helpless as the troll picks you up and chomps your head off.
+        GAME OVER
+    <<else>>
+        The troll points his finger at {$most_fashionable}.
+        "You look tasty."
+        While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
+        Without another word he just continues on his way.
+        <<LoseCharacter($most_fashionable)>>
+        <<set $players_left = GetPlayersLeft()>>
+        That leaves {$players_left} of you.
+    <<endif>>
+   
 ->The Stock market?
     "Wrong... Now you."
-    The troll points his finger at [MOST FASHIONABLE CHARACTER]. "You look tasty."
-    While the whole party is frozen in fear, the troll reaches in, grabs, and eats [CHARACTER]. Without another word he just continues on his way.
-    That leaves [X] number of you.
+    <<if $players_left == 1>>
+        The troll stares at you intensely. 
+        "You look tasty." 
+        Frozen in fear, you're helpless as the troll picks you up and chomps your head off.
+        GAME OVER
+    <<else>>
+        The troll points his finger at {$most_fashionable}.
+        "You look tasty."
+        While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
+        Without another word he just continues on his way.
+        <<LoseCharacter($most_fashionable)>>
+        <<set $players_left = GetPlayersLeft()>>
+        That leaves {$players_left} of you.
+    <<endif>>
 ===
 title: Offer_Snacks
 position: 16,336
 ---
-//we need some if statements in here!!
+<<set $players_left = GetPlayersLeft()>>
+<<set $most_fashionable = GetMostFashionable()>>
+<<set $most_lang = GetMostLang()>>
+<<set $most_hag = GetMostHag()>>
+<<if HasHighLang()>>
+    {$most_lang} begins to speak in Trollish to try to convince the Troll to take some snacks and leave you alone.
+    The Troll looks shocked and begins to speak back in Trollish. They seem to be laughing and getting along, but you can't understand them.
+    Ultimately the troll chuckles and walks away.
+    {$most_lang} says he was actually pretty chill. Who would have guessed?
+<<elseif HasHighHaggling()>>
+    "You're not you when you're hungry. Have an unbranded snack." 
+    <<LoseSnack(1)>>
+    {$most_hag} hands out a candy bar to the Troll. The Troll grabs it and takes a big bite.
+    "Thanks."
+    He walks away without another word.
+<<else>>
+    <<if $players_left == 1>>
+        "A snack sounds nice. You will do." 
+        The troll stares at you intensely. 
+        "You look tasty." 
+        Frozen in fear, you're helpless as the troll picks you up and chomps your head off.
+        GAME OVER
+    <<else>>
+        "A snack sounds nice. You will do." 
+        The troll points his finger at {$most_fashionable}. 
+        "You look tasty."
+        While the whole party is frozen in fear, the troll reaches in, grabs, and eats {$most_fashionable}. 
+        Without another word he just continues on his way.
+        <<LoseCharacter($most_fashionable)>>
+        <<set $players_left = GetPlayersLeft()>>
+        That leaves {$players_left} of you.
+    <<endif>>
+       
+<<endif>>
 ===
 title: Book_It
 position: 399,87
 ---
-
+<<set $slowest = GetSlowest()>>
+<<set $slowest_pronoun = GetSlowestPronoun()>>
+<<set $players_left = GetPlayersLeft()>>
+    <<if AllFleetFooted()>>
+        "BREAK!"
+        All of you try to run in different directions, abandoning the cart. 
+        Confused by the sudden quick movement, the Troll can't pick a direction to chase and gives up, moving to the car behind you. 
+        All of you rush to get back in, thankful that you were fast enough to evade him.
+    <<else>>
+        <<if $players_left == 1>>
+            <<if RollDice(50)>>
+                "BREAK!" You scream to no one. 
+                While you try your best to run away, the troll has nobody else to chase but you, so while you may run faster, he ultimately catches you, and chomps down on your head.
+                GAME OVER
+            <<else>>
+                "BREAK!" You scream to no one. 
+                After running for a short time you turn to see the troll give up. 
+                As you breathe a sigh of relief you realize why he turned around. 
+                You ran off the bridge. 
+                As you fall you wonder if maybe you could have been smarter about that.
+                GAME OVER
+            <<endif>>
+        <<else>>
+            "BREAK!" While you all try to get away, {$slowest} is way too slow and is easily grabbed by the Troll. 
+            Without even chewing, he swallows {$slowest_pronoun} whole. 
+            With that he moves on, leaving the rest of you to huddle back in the cart, too scarred to address what just happened.
+            <<LoseCharacter($slowest)>>
+            <<set $players_left = GetPlayersLeft()>>
+            That leaves {$players_left} of you.
+        <<endif>>
+       
+    <<endif>>
 ===

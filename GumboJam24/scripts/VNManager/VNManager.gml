@@ -4,10 +4,8 @@ function initialize_vn(){
 // enabling typing from scribble
 typist = scribble_typist(); // there is only ONE typist
 
+global.snacks = 50;
 global._party_members = ds_list_create();
-
-
-//TEMP: Creating partymembers to show
 while (ds_list_size(global._party_members) < 3)
 {
 	var member = new Person()
@@ -67,8 +65,7 @@ function draw_vn()
 				//TODO: Make an if statement in case we want a sprite
 				_display_continue_text()
 			}
-			else
-			{
+		
 			    //Draw all content
 			    var _i = 0;
 			    repeat(ChatterboxGetContentCount(global.chatterbox))
@@ -80,9 +77,9 @@ function draw_vn()
 			        ++_i;
 			    }
 			}
-		}
-	
 }
+	
+
 
 
 
@@ -193,7 +190,7 @@ function _display_continue_sprite()
 function _display_options()
 {
 	var _x = textbox_x_pos + horizontal_padding;
-	var _y = textbox_y_pos + vertical_padding -100;
+	var _y = textbox_y_pos + vertical_padding -200;
 	
 
 	if(options_sprite == pointer_null)

@@ -2,6 +2,7 @@
 function Person() constructor{
 	_name = "";
 	_pronouns = "";
+	_secondary = "";
 	//add the 25 stats here
 	//NOTE: This is hacky. SOrry
 	
@@ -32,8 +33,18 @@ function Person() constructor{
 	{
 		randomize()
 		
-		_name = get_random_name(); // TODD: Enable random naming via ini maybe?
-		_pronouns = get_random_pronouns()
+		_name = get_random_name(); 
+		
+		var pronouns = "she,he,they,xe,ze,fae,bun,it,she"
+		var seconds = "her,him,them,xem,zir,faem,bun,it,hyr"
+		var split_pronouns = string_split(pronouns,",");
+		var split_seconds = string_split(seconds,",");
+		
+		var rand_num = irandom(array_length(split_pronouns)-1);
+		
+		
+		_pronouns = array_get(split_pronouns,rand_num);
+		_secondary = array_get(split_seconds,rand_num);
 		fashionability = irandom(100);
 		fleetfootedness = irandom(100);
 		languages_learned = irandom(100);
@@ -77,14 +88,6 @@ function get_random_name()
 	
 	
 	return array_get(split_names,irandom(array_length(split_names)-1))
-}
-
-function get_random_pronouns()
-{
-	var pronouns = "she,he,they,xe,ze,she/they,he/they,fae,bun,it,she/hyr"
-	var split_pronouns = string_split(pronouns,",");
-
-	return array_get(split_pronouns,irandom(array_length(split_pronouns)-1))
 }
 
 // we don't need this tbh
